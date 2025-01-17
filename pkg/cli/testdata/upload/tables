@@ -5,6 +5,7 @@ upload-tables
   }
 }
 ----
+=== uploading tables
 Logs API Hook: claim_instance_id=NULL	claim_session_id=NULL	created=2024-12-11 07:39:23.165132	created_by_id=NULL	created_by_type=NULL	ddtags=env:debug,source:debug-zip,upload_id:abc-20241114000000,cluster:ABC,table:crdb_internal.system_jobs	id=100	last_run=NULL	num_runs=NULL	payload=redacted	progress=map[Details:map[keyVisualizerProgress:map[]] Progress:<nil> modified_micros:1.733902763165132e+15 trace_id:0]	status=running	
 Logs API Hook: claim_instance_id=NULL	claim_session_id=NULL	created=2024-12-11 07:39:23.366318	created_by_id=3	created_by_type=node	ddtags=env:debug,source:debug-zip,upload_id:abc-20241114000000,cluster:ABC,table:crdb_internal.system_jobs	id=101	last_run=NULL	num_runs=NULL	payload=redacted	progress=map[Details:map[pollJobsStats:map[]] Progress:<nil> modified_micros:1.733902763366318e+15 trace_id:0]	status=running	
 Logs API Hook: claim_instance_id=NULL	claim_session_id=NULL	created=2024-12-11 07:39:23.374069	created_by_id=NULL	created_by_type=NULL	ddtags=env:debug,source:debug-zip,upload_id:abc-20241114000000,cluster:ABC,table:crdb_internal.system_jobs	id=103	last_run=NULL	num_runs=NULL	payload=redacted	progress=map[Details:map[update_sql_activity:map[]] Progress:<nil> modified_micros:1.733902763374069e+15 trace_id:0]	status=running	
@@ -33,9 +34,6 @@ Logs API Hook: https://http-intake.logs.us5.datadoghq.com/api/v2/logs
 Logs API Hook: https://http-intake.logs.us5.datadoghq.com/api/v2/logs
 Logs API Hook: https://http-intake.logs.us5.datadoghq.com/api/v2/logs
 Upload ID: abc-20241114000000
+View as logs here: https://us5.datadoghq.com/logs?query=source:debug-zip&upload_id:abc-20241114000000
+View as tables here: https://us5.datadoghq.com/dashboard/ipq-44t-ez8/table-dumps-from-debug-zip?tpl_var_upload_id%5B0%5D=abc-20241114000000
 debug zip upload debugDir --dd-api-key=dd-api-key --dd-app-key=dd-app-key --cluster=ABC --include=tables
-uploaded crdb_internal.cluster_locks.txt
-uploaded crdb_internal.system_jobs.txt
-uploaded nodes/1/crdb_internal.node_metrics.txt
-uploaded nodes/2/crdb_internal.leases.txt
-uploaded system.namespace.txt
