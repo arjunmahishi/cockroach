@@ -25,6 +25,7 @@ import (
 	"github.com/cockroachdb/cockroach/pkg/util/randutil"
 	"github.com/cockroachdb/datadriven"
 	"github.com/cockroachdb/errors"
+	"github.com/davecgh/go-spew/spew"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -820,5 +821,64 @@ func TestBareLabelKeywords(t *testing.T) {
 		} else if err == nil && shouldFail {
 			require.Errorf(t, err, "expected %s to fail parsing as a bare column label", k)
 		}
+	}
+}
+
+// TestParseRedactedQueries demonstrates that redacted SQL queries can be
+// successfully parsed into tree.Statement objects.
+func TestParseRedactedQueries(t *testing.T) {
+	testCases := []struct {
+		name  string
+		query string
+	}{
+		{
+			name:  "select with redacted constant",
+			query: "SELECT * FROM users WHERE id = _",
+		},
+		{
+			name:  "insert with redacted values",
+			query: "INSERT INTO users VALUES (_, __more__)",
+		},
+		{
+			name:  "select with redacted IN clause",
+			query: "SELECT * FROM products WHERE category IN (_, __more__)",
+		},
+		{
+			name:  "values clause with redacted rows",
+			query: "VALUES (_, __more__), (__more__)",
+		},
+		{
+			name:  "array with redacted elements",
+			query: "SELECT ARRAY[_, __more__]",
+		},
+		{
+			name:  "tuple with redacted elements",
+			query: "SELECT (_, __more__) FROM users",
+		},
+		{
+			name:  "update with redacted values",
+			query: "UPDATE users SET col = _ WHERE id = _",
+		},
+		{
+			name:  "delete with redacted condition",
+			query: "DELETE FROM users WHERE status IN (_, __more__)",
+		},
+	}
+
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			stmt, err := parser.ParseOne(tc.query)
+			require.NoError(t, err, "should parse redacted query successfully")
+			require.NotNil(t, stmt.AST, "AST should not be nil")
+
+			spew.Dump(stmt.AST) // log the full AST
+			t.Log(stmt.AST.StatementType())
+			t.Logf(stmt.AST.StatementTag()) // prints the statement tag like "SELECT", "INSERT", etc.
+			_, err = tree.SimpleStmtVisit(stmt.AST, func(expr tree.Expr) (recurse bool, newExpr tree.Expr, err error) {
+				t.Logf("Visiting AST node: %T", expr)
+				return true, expr, nil
+			})
+			require.NoError(t, err, "AST traversal should not error")
+		})
 	}
 }
