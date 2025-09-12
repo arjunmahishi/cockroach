@@ -1,0 +1,125 @@
+name: "Networking"
+description: "Network traffic and connectivity metrics"
+
+charts:
+  - title: "RPC Bytes Sent"
+    type: "line"
+    graph_type: "node"
+    sources: "nodes"
+    axis:
+      label: "bytes per second"
+      units: "bytes"
+    tooltip: "The number of bytes sent in RPC calls per second {tooltipSelection}."
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.node.rpc.sent.bytes"
+        title: "{node_name}"
+        per_node: true
+        rate: true
+
+  - title: "RPC Bytes Received"
+    type: "line"
+    graph_type: "node"
+    sources: "nodes"
+    axis:
+      label: "bytes per second"
+      units: "bytes"
+    tooltip: "The number of bytes received in RPC calls per second {tooltipSelection}."
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.node.rpc.recv.bytes"
+        title: "{node_name}"
+        per_node: true
+        rate: true
+
+  - title: "RPC Calls"
+    type: "line"
+    graph_type: "node"
+    sources: "nodes"
+    axis:
+      label: "calls per second"
+      units: "count"
+    tooltip: "The number of RPC calls initiated or received per second {tooltipSelection}."
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.node.rpc.sent"
+        title: "Sent"
+        rate: true
+      - name: "cr.node.rpc.recv"
+        title: "Received"
+        rate: true
+
+  - title: "RPC Connections"
+    type: "line"
+    graph_type: "node"
+    sources: "nodes"
+    axis:
+      label: "connections"
+      units: "count"
+    tooltip: "The number of incoming and outgoing RPC connections {tooltipSelection}."
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.node.rpc.conns.incoming"
+        title: "Incoming"
+      - name: "cr.node.rpc.conns.outgoing"
+        title: "Outgoing"
+
+  - title: "Network Bytes Received"
+    type: "line"
+    graph_type: "node"
+    sources: "nodes"
+    axis:
+      label: "bytes per second"
+      units: "bytes"
+    tooltip: "The number of network bytes received per second {tooltipSelection}."
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.node.sys.host.net.recv.bytes"
+        title: "{node_name}"
+        per_node: true
+        rate: true
+
+  - title: "Network Bytes Sent"
+    type: "line"
+    graph_type: "node"
+    sources: "nodes"
+    axis:
+      label: "bytes per second"
+      units: "bytes"
+    tooltip: "The number of network bytes sent per second {tooltipSelection}."
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.node.sys.host.net.send.bytes"
+        title: "{node_name}"
+        per_node: true
+        rate: true
+
+  - title: "Network Packets Received"
+    type: "line"
+    graph_type: "node"
+    sources: "nodes"
+    axis:
+      label: "packets per second"
+      units: "count"
+    tooltip: "The number of network packets received per second {tooltipSelection}."
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.node.sys.host.net.recv.packets"
+        title: "{node_name}"
+        per_node: true
+        rate: true
+
+  - title: "Network Packets Sent"
+    type: "line"
+    graph_type: "node"
+    sources: "nodes"
+    axis:
+      label: "packets per second"
+      units: "count"
+    tooltip: "The number of network packets sent per second {tooltipSelection}."
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.node.sys.host.net.send.packets"
+        title: "{node_name}"
+        per_node: true
+        rate: true

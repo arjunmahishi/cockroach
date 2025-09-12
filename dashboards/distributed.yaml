@@ -1,0 +1,154 @@
+name: "Distributed"
+description: "Distributed system operations (batches, RPCs, transactions)"
+
+charts:
+  - title: "Batches"
+    type: "line"
+    graph_type: "kv"
+    sources: "nodes"
+    axis:
+      label: "batches per second"
+      units: "count"
+    tooltip: "The number of batches processed per second {tooltipSelection}."
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.node.requests.batch.count"
+        title: "Batches"
+        rate: true
+
+  - title: "RPCs"
+    type: "line"
+    graph_type: "node"
+    sources: "nodes"
+    axis:
+      label: "rpcs per second"
+      units: "count"
+    tooltip: "The number of RPC calls initiated or received per second {tooltipSelection}."
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.node.rpc.sent"
+        title: "RPCs Sent"
+        rate: true
+      - name: "cr.node.rpc.recv"
+        title: "RPCs Received"
+        rate: true
+
+  - title: "RPC Errors"
+    type: "line"
+    graph_type: "node"
+    sources: "nodes"
+    axis:
+      label: "errors per second"
+      units: "count"
+    tooltip: "The number of RPC errors per second {tooltipSelection}."
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.node.rpc.sent.local"
+        title: "Local Fast-path"
+        rate: true
+      - name: "cr.node.rpc.sent.nextreplicaerror"
+        title: "Next Replica Errors"
+        rate: true
+
+  - title: "KV Transactions"
+    type: "line"
+    graph_type: "kv"
+    sources: "nodes"
+    axis:
+      label: "transactions per second"
+      units: "count"
+    tooltip: "The number of KV transactions opened per second {tooltipSelection}."
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.node.txn.commits"
+        title: "Commits"
+        rate: true
+      - name: "cr.node.txn.commits1PC"
+        title: "Fast-path Commits"
+        rate: true
+      - name: "cr.node.txn.aborts"
+        title: "Aborts"
+        rate: true
+
+  - title: "KV Transaction Restarts"
+    type: "line"
+    graph_type: "kv"
+    sources: "nodes"
+    axis:
+      label: "restarts per second"
+      units: "count"
+    tooltip: "The number of restarted KV transactions per second {tooltipSelection}."
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.node.txn.restarts.writetooold"
+        title: "Write Too Old"
+        rate: true
+      - name: "cr.node.txn.restarts.deleterange"
+        title: "Delete Range"
+        rate: true
+      - name: "cr.node.txn.restarts.serializable"
+        title: "Serializable"
+        rate: true
+      - name: "cr.node.txn.restarts.possiblereplay"
+        title: "Possible Replay"
+        rate: true
+
+  - title: "KV Transaction Durations: 99th percentile"
+    type: "line"
+    graph_type: "kv"
+    sources: "nodes"
+    axis:
+      label: "transaction duration"
+      units: "duration"
+    tooltip: "KV transaction durations. This time includes all processing in the transaction coordinator {tooltipSelection}."
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.node.txn.durations-p99"
+        title: "{node_name}"
+        per_node: true
+        aggregation: "max"
+
+  - title: "KV Transaction Durations: 50th percentile"
+    type: "line"
+    graph_type: "kv"
+    sources: "nodes"
+    axis:
+      label: "transaction duration"
+      units: "duration"
+    tooltip: "KV transaction durations. This time includes all processing in the transaction coordinator {tooltipSelection}."
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.node.txn.durations-p50"
+        title: "{node_name}"
+        per_node: true
+        aggregation: "max"
+
+  - title: "Node Heartbeat Latency: 99th percentile"
+    type: "line"
+    graph_type: "node"
+    sources: "nodes"
+    axis:
+      label: "heartbeat latency"
+      units: "duration"
+    tooltip: "The latency required to reach each node via gossip {tooltipSelection}."
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.node.gossip.latency-p99"
+        title: "{node_name}"
+        per_node: true
+        aggregation: "max"
+
+  - title: "Node Heartbeat Latency: 50th percentile"
+    type: "line"
+    graph_type: "node"
+    sources: "nodes"
+    axis:
+      label: "heartbeat latency"
+      units: "duration"
+    tooltip: "The latency required to reach each node via gossip {tooltipSelection}."
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.node.gossip.latency-p50"
+        title: "{node_name}"
+        per_node: true
+        aggregation: "max"

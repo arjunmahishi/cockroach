@@ -1166,6 +1166,8 @@ GO_TARGETS = [
     "//pkg/cmd/cr2pg/sqlstream:sqlstream",
     "//pkg/cmd/cr2pg:cr2pg",
     "//pkg/cmd/cr2pg:cr2pg_lib",
+    "//pkg/cmd/dashgen:dashgen",
+    "//pkg/cmd/dashgen:dashgen_lib",
     "//pkg/cmd/dev/io/exec:exec",
     "//pkg/cmd/dev/io/os:os",
     "//pkg/cmd/dev:dev",

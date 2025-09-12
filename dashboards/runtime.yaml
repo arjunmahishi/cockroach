@@ -1,0 +1,125 @@
+name: "Runtime"
+description: "Go runtime metrics (GC, goroutines, memory)"
+
+charts:
+  - title: "Live Bytes"
+    type: "line"
+    graph_type: "node"
+    sources: "nodes"
+    axis:
+      label: "live bytes"
+      units: "bytes"
+    tooltip: "The number of bytes of application data that are stored in memory and not yet garbage collected {tooltipSelection}."
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.node.sys.gc.bytes"
+        title: "{node_name}"
+        per_node: true
+
+  - title: "GC Runs"
+    type: "line"
+    graph_type: "node"
+    sources: "nodes"
+    axis:
+      label: "runs"
+      units: "count"
+    tooltip: "The number of times that Go's garbage collector was invoked per second {tooltipSelection}."
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.node.sys.gc.count"
+        title: "{node_name}"
+        per_node: true
+        rate: true
+
+  - title: "GC Pause Time"
+    type: "line"
+    graph_type: "node"
+    sources: "nodes"
+    axis:
+      label: "pause time"
+      units: "duration"
+    tooltip: "The amount of processor time used by Go's garbage collector per second {tooltipSelection}."
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.node.sys.gc.pause.ns"
+        title: "{node_name}"
+        per_node: true
+        rate: true
+
+  - title: "Goroutine Count"
+    type: "line"
+    graph_type: "node"
+    sources: "nodes"
+    axis:
+      label: "goroutines"
+      units: "count"
+    tooltip: "The number of Goroutines {tooltipSelection}."
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.node.sys.goroutines"
+        title: "{node_name}"
+        per_node: true
+
+  - title: "Go Allocator Memory"
+    type: "line"
+    graph_type: "node"
+    sources: "nodes"
+    axis:
+      label: "memory"
+      units: "bytes"
+    tooltip: "The current bytes of memory allocated by the Go allocator {tooltipSelection}."
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.node.sys.go.allocbytes"
+        title: "Current"
+      - name: "cr.node.sys.go.totalbytes"
+        title: "Total"
+
+  - title: "Go Allocator Memory Operations"
+    type: "line"
+    graph_type: "node"
+    sources: "nodes"
+    axis:
+      label: "operations per second"
+      units: "count"
+    tooltip: "The number of Go memory allocator operations per second {tooltipSelection}."
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.node.sys.go.alloc.count"
+        title: "Allocations"
+        rate: true
+      - name: "cr.node.sys.go.releases.count"
+        title: "Releases"
+        rate: true
+
+  - title: "CGO Calls"
+    type: "line"
+    graph_type: "node"
+    sources: "nodes"
+    axis:
+      label: "calls per second"
+      units: "count"
+    tooltip: "The number of cgo (calls to C code) per second {tooltipSelection}."
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.node.sys.cgo.calls"
+        title: "{node_name}"
+        per_node: true
+        rate: true
+
+  - title: "CPU Time"
+    type: "line"
+    graph_type: "node"
+    sources: "nodes"
+    axis:
+      label: "CPU time"
+      units: "duration"
+    tooltip: "The amount of CPU time used by CockroachDB (excludes child processes) {tooltipSelection}."
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.node.sys.cpu.user.ns"
+        title: "User CPU Time"
+        rate: true
+      - name: "cr.node.sys.cpu.sys.ns"
+        title: "Sys CPU Time"
+        rate: true

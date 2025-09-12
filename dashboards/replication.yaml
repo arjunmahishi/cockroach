@@ -1,0 +1,168 @@
+name: "Replication"
+description: "Range replication and consensus metrics"
+
+charts:
+  - title: "Range Snapshots Generated"
+    type: "line"
+    graph_type: "kv"
+    sources: "stores"
+    axis:
+      label: "snapshots"
+      units: "count"
+    tooltip: "The number of range snapshots generated per second to catch up replicas {tooltipSelection}."
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.store.range.snapshots.generated"
+        title: "Generated"
+        rate: true
+
+  - title: "Range Snapshots Applied by Raft"
+    type: "line"
+    graph_type: "kv"
+    sources: "stores"
+    axis:
+      label: "snapshots"
+      units: "count"
+    tooltip: "The number of range snapshots applied to Raft per second {tooltipSelection}."
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.store.range.snapshots.applied-voter"
+        title: "Applied (Voter)"
+        rate: true
+      - name: "cr.store.range.snapshots.applied-initial"
+        title: "Applied (Initial)"
+        rate: true
+      - name: "cr.store.range.snapshots.applied-non-voter"
+        title: "Applied (Non-Voter)"
+        rate: true
+
+  - title: "Replica Snapshots In Progress"
+    type: "line"
+    graph_type: "kv"
+    sources: "stores"
+    axis:
+      label: "snapshots"
+      units: "count"
+    tooltip: "The number of snapshots currently being sent or received {tooltipSelection}."
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.store.replicas.reserved"
+        title: "Reserved"
+
+  - title: "Replicas"
+    type: "line"
+    graph_type: "kv"
+    sources: "stores"
+    axis:
+      label: "replicas"
+      units: "count"
+    tooltip: "The number of replicas stored on this node {tooltipSelection}."
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.store.replicas"
+        title: "Replicas"
+      - name: "cr.store.replicas.leaseholders"
+        title: "Leaseholders"
+      - name: "cr.store.replicas.leaders"
+        title: "Raft Leaders"
+
+  - title: "Leaseholder"
+    type: "line"
+    graph_type: "kv"
+    sources: "stores"
+    axis:
+      label: "replicas"
+      units: "count"
+    tooltip: "The number of replicas for which this node holds the lease {tooltipSelection}."
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.store.replicas.leaseholders"
+        title: "Leaseholders"
+
+  - title: "Logical Bytes"
+    type: "line"
+    graph_type: "kv"
+    sources: "stores"
+    axis:
+      label: "logical store size"
+      units: "bytes"
+    tooltip: "The logical bytes stored on this node {tooltipSelection}."
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.store.totalbytes"
+        title: "Total"
+      - name: "cr.store.livebytes"
+        title: "Live"
+      - name: "cr.store.sysbytes"
+        title: "System"
+
+  - title: "Keys"
+    type: "line"
+    graph_type: "kv"
+    sources: "stores"
+    axis:
+      label: "keys"
+      units: "count"
+    tooltip: "The number of keys stored on this node {tooltipSelection}."
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.store.totalkeys"
+        title: "Total"
+      - name: "cr.store.livekeys"
+        title: "Live"
+      - name: "cr.store.syskeys"
+        title: "System"
+
+  - title: "RocksDB Read Amplification"
+    type: "line"
+    graph_type: "kv"
+    sources: "stores"
+    axis:
+      label: "factor"
+      units: "count"
+    tooltip: "The average number of real read operations executed per logical read operation {tooltipSelection}."
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.store.rocksdb.read-amplification"
+        title: "Read Amplification"
+
+  - title: "RocksDB SSTables"
+    type: "line"
+    graph_type: "kv"
+    sources: "stores"
+    axis:
+      label: "sstables"
+      units: "count"
+    tooltip: "The number of RocksDB SSTables in use {tooltipSelection}."
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.store.rocksdb.num-sstables"
+        title: "SSTables"
+
+  - title: "File Descriptor Count"
+    type: "line"
+    graph_type: "node"
+    sources: "nodes"
+    axis:
+      label: "descriptors"
+      units: "count"
+    tooltip: "The number of open file descriptors {tooltipSelection}."
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.node.sys.fd.open"
+        title: "{node_name}"
+        per_node: true
+
+  - title: "Uptime"
+    type: "line"
+    graph_type: "node"
+    sources: "nodes"
+    axis:
+      label: "uptime"
+      units: "duration"
+    tooltip: "Process uptime {tooltipSelection}."
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.node.sys.uptime"
+        title: "{node_name}"
+        per_node: true

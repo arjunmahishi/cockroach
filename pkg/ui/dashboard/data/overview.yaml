@@ -1,0 +1,112 @@
+name: "Overview"
+description: "High-level cluster overview metrics"
+
+charts:
+  - title: "SQL Queries Per Second"
+    type: "line"
+    axis:
+      label: "queries per second"
+      units: "count"
+    tooltip: "A moving average of the number of SELECT, INSERT, UPDATE, and DELETE statements, and the sum of all four, successfully executed per second {tooltipSelection}."
+    options:
+      graph_type: "sql"
+      sources: "nodes"
+      show_metrics_in_tooltip: true
+      precalc_graph_size: true
+    metrics:
+      - name: "cr.node.sql.select.count"
+        title: "Selects"
+        options:
+          rate: true
+      - name: "cr.node.sql.update.count"
+        title: "Updates"
+        options:
+          rate: true
+      - name: "cr.node.sql.insert.count"
+        title: "Inserts"
+        options:
+          rate: true
+      - name: "cr.node.sql.delete.count"
+        title: "Deletes"
+        options:
+          rate: true
+      - name: "cr.node.sql.crud_query.count"
+        title: "Total Queries"
+        options:
+          rate: true
+
+  - title: "Service Latency: SQL Statements, 99th percentile"
+    type: "line"
+    axis:
+      label: "latency"
+      units: "duration"
+    tooltip:
+      text: "Over the last minute, this node executed 99% of SQL statements within this time."
+      note: "This time only includes SELECT, INSERT, UPDATE and DELETE statements and does not include network latency between the node and client."
+    options:
+      graph_type: "sql"
+      sources: "nodes"
+      show_metrics_in_tooltip: true
+      precalc_graph_size: true
+    metrics:
+      - name: "cr.node.sql.service.latency-p99"
+        title: "Node {node_id}"
+        options:
+          per_node: true
+          aggregation: "max"
+
+  - title: "SQL Statement Contention"
+    type: "line"
+    axis:
+      label: "Average number of queries per second"
+      units: "count"
+    tooltip: "A moving average of the number of SQL statements executed per second that experienced contention {tooltipSelection}."
+    options:
+      graph_type: "sql"
+      sources: "nodes"
+      show_metrics_in_tooltip: true
+      precalc_graph_size: true
+    metrics:
+      - name: "cr.node.sql.distsql.contended_queries.count"
+        title: "Contention"
+        options:
+          rate: true
+
+  - title: "Replicas per Node"
+    type: "line"
+    axis:
+      label: "replicas"
+      units: "count"
+    tooltip:
+      text: "The number of range replicas stored on this node."
+      note: "Ranges are subsets of your data, which are replicated to ensure survivability."
+    options:
+      graph_type: "kv"
+      sources: "stores"
+      show_metrics_in_tooltip: true
+      precalc_graph_size: true
+    metrics:
+      - name: "cr.store.replicas"
+        title: "Node {node_id}"
+        options:
+          per_node: true
+          sources_type: "stores_for_node"
+
+  - title: "Capacity"
+    type: "line"
+    axis:
+      label: "capacity"
+      units: "bytes"
+    tooltip: "capacity_graph_tooltip"
+    options:
+      graph_type: "kv"
+      sources: "stores"
+      show_metrics_in_tooltip: true
+      precalc_graph_size: true
+    metrics:
+      - name: "cr.store.capacity"
+        title: "Max"
+      - name: "cr.store.capacity.available"
+        title: "Available"
+      - name: "cr.store.capacity.used"
+        title: "Used"

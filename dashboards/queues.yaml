@@ -1,0 +1,155 @@
+name: "Queues"
+description: "Internal queue processing metrics"
+
+charts:
+  - title: "GC Queue"
+    type: "line"
+    graph_type: "kv"
+    sources: "stores"
+    axis:
+      label: "actions per second"
+      units: "count"
+    tooltip: "The number of GC queue actions per second {tooltipSelection}."
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.store.queue.gc.process.success"
+        title: "Successful Actions"
+        rate: true
+      - name: "cr.store.queue.gc.process.failure"
+        title: "Failed Actions"
+        rate: true
+      - name: "cr.store.queue.gc.pending"
+        title: "Pending Actions"
+
+  - title: "Replica GC Queue"
+    type: "line"
+    graph_type: "kv"
+    sources: "stores"
+    axis:
+      label: "actions per second"
+      units: "count"
+    tooltip: "The number of replica GC queue actions per second {tooltipSelection}."
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.store.queue.replicagc.process.success"
+        title: "Successful Actions"
+        rate: true
+      - name: "cr.store.queue.replicagc.process.failure"
+        title: "Failed Actions"
+        rate: true
+      - name: "cr.store.queue.replicagc.pending"
+        title: "Pending Actions"
+
+  - title: "Replication Queue"
+    type: "line"
+    graph_type: "kv"
+    sources: "stores"
+    axis:
+      label: "actions per second"
+      units: "count"
+    tooltip: "The number of replication queue actions per second {tooltipSelection}."
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.store.queue.replicate.process.success"
+        title: "Successful Actions"
+        rate: true
+      - name: "cr.store.queue.replicate.process.failure"
+        title: "Failed Actions"
+        rate: true
+      - name: "cr.store.queue.replicate.pending"
+        title: "Pending Actions"
+
+  - title: "Split Queue"
+    type: "line"
+    graph_type: "kv"
+    sources: "stores"
+    axis:
+      label: "actions per second"
+      units: "count"
+    tooltip: "The number of split queue actions per second {tooltipSelection}."
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.store.queue.split.process.success"
+        title: "Successful Actions"
+        rate: true
+      - name: "cr.store.queue.split.process.failure"
+        title: "Failed Actions"
+        rate: true
+      - name: "cr.store.queue.split.pending"
+        title: "Pending Actions"
+
+  - title: "Consistency Checker Queue"
+    type: "line"
+    graph_type: "kv"
+    sources: "stores"
+    axis:
+      label: "actions per second"
+      units: "count"
+    tooltip: "The number of consistency checker queue actions per second {tooltipSelection}."
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.store.queue.consistency.process.success"
+        title: "Successful Actions"
+        rate: true
+      - name: "cr.store.queue.consistency.process.failure"
+        title: "Failed Actions"
+        rate: true
+      - name: "cr.store.queue.consistency.pending"
+        title: "Pending Actions"
+
+  - title: "Raft Log Queue"
+    type: "line"
+    graph_type: "kv"
+    sources: "stores"
+    axis:
+      label: "actions per second"
+      units: "count"
+    tooltip: "The number of raft log queue actions per second {tooltipSelection}."
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.store.queue.raftlog.process.success"
+        title: "Successful Actions"
+        rate: true
+      - name: "cr.store.queue.raftlog.process.failure"
+        title: "Failed Actions"
+        rate: true
+      - name: "cr.store.queue.raftlog.pending"
+        title: "Pending Actions"
+
+  - title: "Raft Snapshot Queue"
+    type: "line"
+    graph_type: "kv"
+    sources: "stores"
+    axis:
+      label: "actions per second"
+      units: "count"
+    tooltip: "The number of raft snapshot queue actions per second {tooltipSelection}."
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.store.queue.raftsnapshot.process.success"
+        title: "Successful Actions"
+        rate: true
+      - name: "cr.store.queue.raftsnapshot.process.failure"
+        title: "Failed Actions"
+        rate: true
+      - name: "cr.store.queue.raftsnapshot.pending"
+        title: "Pending Actions"
+
+  - title: "Time Series Maintenance Queue"
+    type: "line"
+    graph_type: "kv"
+    sources: "stores"
+    axis:
+      label: "actions per second"
+      units: "count"
+    tooltip: "The number of time series maintenance queue actions per second {tooltipSelection}."
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.store.queue.tsmaintenance.process.success"
+        title: "Successful Actions"
+        rate: true
+      - name: "cr.store.queue.tsmaintenance.process.failure"
+        title: "Failed Actions"
+        rate: true
+      - name: "cr.store.queue.tsmaintenance.pending"
+        title: "Pending Actions"

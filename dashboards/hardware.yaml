@@ -1,0 +1,143 @@
+name: "Hardware"
+description: "System resource utilization metrics"
+
+charts:
+  - title: "CPU Percent"
+    type: "line"
+    graph_type: "node"
+    sources: "nodes"
+    axis:
+      label: "CPU"
+      units: "percentage"
+    tooltip: "CPU usage for the CRDB nodes {tooltipSelection}"
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.node.sys.cpu.combined.percent-normalized"
+        title: "{node_name}"
+        per_node: true
+
+  - title: "Host CPU Percent"
+    type: "line"
+    graph_type: "node"
+    sources: "nodes"
+    axis:
+      label: "CPU"
+      units: "percentage"
+    tooltip: "Machine-wide CPU usage {tooltipSelection}"
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.node.sys.cpu.host.combined.percent-normalized"
+        title: "{node_name}"
+        per_node: true
+
+  - title: "Memory Usage"
+    type: "line"
+    graph_type: "node"
+    sources: "nodes"
+    axis:
+      label: "memory usage"
+      units: "bytes"
+    tooltip: "Memory in use {tooltipSelection}"
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.node.sys.rss"
+        title: "{node_name}"
+        per_node: true
+
+  - title: "Disk Read Bytes/s"
+    type: "line"
+    graph_type: "node"
+    sources: "nodes"
+    axis:
+      label: "bytes"
+      units: "bytes"
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.node.sys.host.disk.read.bytes"
+        title: "{node_name}"
+        per_node: true
+        rate: true
+
+  - title: "Disk Write Bytes/s"
+    type: "line"
+    graph_type: "node"
+    sources: "nodes"
+    axis:
+      label: "bytes"
+      units: "bytes"
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.node.sys.host.disk.write.bytes"
+        title: "{node_name}"
+        per_node: true
+        rate: true
+
+  - title: "Disk Read Ops/s"
+    type: "line"
+    graph_type: "node"
+    sources: "nodes"
+    axis:
+      label: "disk ops"
+      units: "count"
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.node.sys.host.disk.read.count"
+        title: "{node_name}"
+        per_node: true
+        rate: true
+
+  - title: "Disk Write Ops/s"
+    type: "line"
+    graph_type: "node"
+    sources: "nodes"
+    axis:
+      label: "disk ops"
+      units: "count"
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.node.sys.host.disk.write.count"
+        title: "{node_name}"
+        per_node: true
+        rate: true
+
+  - title: "Available Disk Capacity"
+    type: "line"
+    graph_type: "kv"
+    sources: "stores"
+    axis:
+      label: "capacity"
+      units: "bytes"
+    tooltip: "available_disc_capacity_graph_tooltip"
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.store.capacity.available"
+        title: "{store_name}"
+        per_store: true
+
+  - title: "Network Bytes Received/s"
+    type: "line"
+    graph_type: "node"
+    sources: "nodes"
+    axis:
+      label: "bytes"
+      units: "bytes"
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.node.sys.host.net.recv.bytes"
+        title: "{node_name}"
+        per_node: true
+        rate: true
+
+  - title: "Network Bytes Sent/s"
+    type: "line"
+    graph_type: "node"
+    sources: "nodes"
+    axis:
+      label: "bytes"
+      units: "bytes"
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.node.sys.host.net.send.bytes"
+        title: "{node_name}"
+        per_node: true
+        rate: true

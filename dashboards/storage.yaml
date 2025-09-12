@@ -1,0 +1,180 @@
+name: "Storage"
+description: "Storage engine and disk operations"
+
+charts:
+  - title: "Engine Writes"
+    type: "line"
+    graph_type: "kv"
+    sources: "stores"
+    axis:
+      label: "writes per second"
+      units: "count"
+    tooltip: "The number of keys written (i.e. applied by raft) per second to the storage engine {tooltipSelection}."
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.store.engine.write.count"
+        title: "Writes"
+        rate: true
+
+  - title: "Engine Reads"
+    type: "line"
+    graph_type: "kv"
+    sources: "stores"
+    axis:
+      label: "reads per second"
+      units: "count"
+    tooltip: "The number of keys read per second from the storage engine {tooltipSelection}."
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.store.engine.read.count"
+        title: "Reads"
+        rate: true
+
+  - title: "Engine Bytes"
+    type: "line"
+    graph_type: "kv"
+    sources: "stores"
+    axis:
+      label: "bytes"
+      units: "bytes"
+    tooltip: "The amount of data written to and read from disk by the storage engine {tooltipSelection}."
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.store.engine.write.bytes"
+        title: "Written"
+        rate: true
+      - name: "cr.store.engine.read.bytes"
+        title: "Read"
+        rate: true
+
+  - title: "Write Ahead Log"
+    type: "line"
+    graph_type: "kv"
+    sources: "stores"
+    axis:
+      label: "bytes"
+      units: "bytes"
+    tooltip: "The number of bytes written to the WAL (write-ahead log) {tooltipSelection}."
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.store.engine.wal.bytes.written"
+        title: "WAL Bytes Written"
+        rate: true
+
+  - title: "Engine Block Cache Misses"
+    type: "line"
+    graph_type: "kv"
+    sources: "stores"
+    axis:
+      label: "misses per second"
+      units: "count"
+    tooltip: "The number of RocksDB block cache misses per second {tooltipSelection}."
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.store.rocksdb.block.cache.misses"
+        title: "Cache Misses"
+        rate: true
+
+  - title: "Engine Block Cache Hit Rate"
+    type: "line"
+    graph_type: "kv"
+    sources: "stores"
+    axis:
+      label: "percentage"
+      units: "percentage"
+    tooltip: "The percentage of cache lookups that hit in the RocksDB block cache {tooltipSelection}."
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.store.rocksdb.block.cache.hit-rate"
+        title: "Hit Rate"
+
+  - title: "Engine Block Cache Usage"
+    type: "line"
+    graph_type: "kv"
+    sources: "stores"
+    axis:
+      label: "bytes"
+      units: "bytes"
+    tooltip: "The bytes used by the RocksDB block cache {tooltipSelection}."
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.store.rocksdb.block.cache.usage"
+        title: "Cache Usage"
+
+  - title: "Engine Block Cache Size"
+    type: "line"
+    graph_type: "kv"
+    sources: "stores"
+    axis:
+      label: "bytes"
+      units: "bytes"
+    tooltip: "The size of the RocksDB block cache {tooltipSelection}."
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.store.rocksdb.block.cache.size"
+        title: "Cache Size"
+
+  - title: "Engine Bloom Filter Utilization"
+    type: "line"
+    graph_type: "kv"
+    sources: "stores"
+    axis:
+      label: "bloom filter lookups per second"
+      units: "count"
+    tooltip: "The number of bloom filter lookups per second {tooltipSelection}."
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.store.rocksdb.bloom.filter.useful"
+        title: "Useful"
+        rate: true
+      - name: "cr.store.rocksdb.bloom.filter.checked"
+        title: "Checked"
+        rate: true
+
+  - title: "Engine Compactions/Flushes"
+    type: "line"
+    graph_type: "kv"
+    sources: "stores"
+    axis:
+      label: "compactions per second"
+      units: "count"
+    tooltip: "The number of table compactions and memtable flushes per second {tooltipSelection}."
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.store.rocksdb.compactions"
+        title: "Compactions"
+        rate: true
+      - name: "cr.store.rocksdb.flushes"
+        title: "Flushes"
+        rate: true
+
+  - title: "Engine Stalls"
+    type: "line"
+    graph_type: "kv"
+    sources: "stores"
+    axis:
+      label: "stalls per second"
+      units: "count"
+    tooltip: "The number of times RocksDB intentionally delayed incoming writes {tooltipSelection}."
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.store.rocksdb.memtable.compaction.stalls"
+        title: "Memtable Stalls"
+        rate: true
+      - name: "cr.store.rocksdb.l0.sublevels.stalls"
+        title: "L0 Sublevels Stalls"
+        rate: true
+
+  - title: "Engine Write Stalls"
+    type: "line"
+    graph_type: "kv"
+    sources: "stores"
+    axis:
+      label: "stall time per second"
+      units: "duration"
+    tooltip: "Time spent in write stalls {tooltipSelection}."
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.store.rocksdb.write.stall.nanos"
+        title: "Write Stalls"
+        rate: true

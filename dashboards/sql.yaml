@@ -1,0 +1,178 @@
+name: "SQL"
+description: "SQL layer performance and operations"
+
+charts:
+  - title: "SQL Connections"
+    type: "line"
+    graph_type: "sql"
+    sources: "nodes"
+    axis:
+      label: "connections"
+      units: "count"
+    tooltip: "The total number of active SQL connections {tooltipSelection}."
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.node.sql.conns"
+        title: "{node_name}"
+        per_node: true
+
+  - title: "SQL Byte Traffic"
+    type: "line"
+    graph_type: "sql"
+    sources: "nodes"
+    axis:
+      label: "bytes"
+      units: "bytes"
+    tooltip: "The total amount of SQL client network traffic in bytes per second {tooltipSelection}."
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.node.sql.bytesin"
+        title: "Bytes In"
+        rate: true
+      - name: "cr.node.sql.bytesout"
+        title: "Bytes Out"
+        rate: true
+
+  - title: "SQL Statements"
+    type: "line"
+    graph_type: "sql"
+    sources: "nodes"
+    axis:
+      label: "statements"
+      units: "count"
+    tooltip: "A moving average of the # of SELECT, INSERT, UPDATE, DELETE, BEGIN, COMMIT, ROLLBACK, SET, SHOW, and miscellaneous statements per second {tooltipSelection}."
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.node.sql.select.count"
+        title: "SELECT"
+        rate: true
+      - name: "cr.node.sql.update.count"
+        title: "UPDATE"
+        rate: true
+      - name: "cr.node.sql.insert.count"
+        title: "INSERT"
+        rate: true
+      - name: "cr.node.sql.delete.count"
+        title: "DELETE"
+        rate: true
+      - name: "cr.node.sql.misc.count"
+        title: "Misc"
+        rate: true
+
+  - title: "SQL Statement Errors"
+    type: "line"
+    graph_type: "sql"
+    sources: "nodes"
+    axis:
+      label: "errors"
+      units: "count"
+    tooltip: "The number of statements which returned a planning or runtime error {tooltipSelection}."
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.node.sql.failure.count"
+        title: "Errors"
+        rate: true
+
+  - title: "SQL Statement Contention"
+    type: "line"
+    graph_type: "sql"
+    sources: "nodes"
+    axis:
+      label: "queries"
+      units: "count"
+    tooltip: "The number of SQL statements that experienced contention {tooltipSelection}."
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.node.sql.distsql.contended_queries.count"
+        title: "Contention"
+        rate: true
+
+  - title: "Active SQL Statements"
+    type: "line"
+    graph_type: "sql"
+    sources: "nodes"
+    axis:
+      label: "queries"
+      units: "count"
+    tooltip: "The current number of SQL statements being processed {tooltipSelection}."
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.node.sql.query.count"
+        title: "Queries"
+
+  - title: "Full Table/Index Scans"
+    type: "line"
+    graph_type: "sql"
+    sources: "nodes"
+    axis:
+      label: "queries"
+      units: "count"
+    tooltip: "The number of full table and index scans {tooltipSelection}."
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.node.sql.distsql.queries.spilled"
+        title: "Spilled Queries"
+        rate: true
+      - name: "cr.node.sql.distsql.flows.total"
+        title: "DistSQL Flows"
+        rate: true
+
+  - title: "Active Flows for Distributed SQL Statements"
+    type: "line"
+    graph_type: "sql"
+    sources: "nodes"
+    axis:
+      label: "flows"
+      units: "count"
+    tooltip: "The number of distributed SQL flows currently running {tooltipSelection}."
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.node.sql.distsql.flows.active"
+        title: "Active Flows"
+
+  - title: "Connection Latency: 99th percentile"
+    type: "line"
+    graph_type: "sql"
+    sources: "nodes"
+    axis:
+      label: "latency"
+      units: "duration"
+    tooltip: "Over the last minute, 99% of requests to open a SQL connection were completed within this time."
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.node.sql.new_conns.latency-p99"
+        title: "{node_name}"
+        per_node: true
+        aggregation: "max"
+
+  - title: "Execution Latency: 99th percentile"
+    type: "line"
+    graph_type: "sql"
+    sources: "nodes"
+    axis:
+      label: "latency"
+      units: "duration"
+    tooltip: "Over the last minute, 99% of SQL statements were executed within this time."
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.node.sql.exec.latency-p99"
+        title: "{node_name}"
+        per_node: true
+        aggregation: "max"
+
+  - title: "Service Latency: SQL Statements, 99th percentile"
+    type: "line"
+    graph_type: "sql"
+    sources: "nodes"
+    axis:
+      label: "latency"
+      units: "duration"
+    tooltip:
+      text: "Over the last minute, this node executed 99% of SQL statements within this time."
+      note: "This time only includes SELECT, INSERT, UPDATE and DELETE statements and does not include network latency between the node and client."
+    show_metrics_in_tooltip: true
+    metrics:
+      - name: "cr.node.sql.service.latency-p99"
+        title: "{node_name}"
+        per_node: true
+        aggregation: "max"
